@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2025 a las 16:08:09
+-- Tiempo de generación: 17-12-2025 a las 00:08:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -142,9 +142,17 @@ CREATE TABLE `usuario` (
 --
 
 CREATE TABLE `usuario_equipo` (
+  `Id_EquipoUsuario` int(11) NOT NULL,
   `Id_Empleado` int(11) NOT NULL,
   `Id_activo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario_equipo`
+--
+
+INSERT INTO `usuario_equipo` (`Id_EquipoUsuario`, `Id_Empleado`, `Id_activo`) VALUES
+(1, 500002643, 5439);
 
 --
 -- Índices para tablas volcadas
@@ -196,7 +204,8 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `usuario_equipo`
 --
 ALTER TABLE `usuario_equipo`
-  ADD PRIMARY KEY (`Id_Empleado`,`Id_activo`),
+  ADD PRIMARY KEY (`Id_EquipoUsuario`),
+  ADD KEY `fk_usu_equipo_usuario` (`Id_Empleado`),
   ADD KEY `fk_usu_equipo_equipo` (`Id_activo`);
 
 --
@@ -228,6 +237,12 @@ ALTER TABLE `soporte`
   MODIFY `Id_Soporte` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `usuario_equipo`
+--
+ALTER TABLE `usuario_equipo`
+  MODIFY `Id_EquipoUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -256,7 +271,7 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `usuario_equipo`
   ADD CONSTRAINT `fk_usu_equipo_equipo` FOREIGN KEY (`Id_activo`) REFERENCES `equipo_computo` (`Id_activo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_usu_equipo_usuario` FOREIGN KEY (`Id_Empleado`) REFERENCES `usuario` (`Id_Empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_usu_equipo_usuario` FOREIGN KEY (`Id_Empleado`) REFERENCES `empleado` (`Id_Empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
