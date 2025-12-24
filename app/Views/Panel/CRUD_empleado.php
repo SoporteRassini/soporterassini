@@ -248,13 +248,31 @@
               <div class="card-header">
                 <h3 class="card-title">Lista de empleados</h3>
               </div>
+
+            <form action="<?= site_url('empleado') ?>" method="get" class="mr-2">
+            <div class="input-group input-group-sm" style="width: 200px;">
+                <input
+                    type="text"
+                    name="q"
+                    class="form-control"
+                    placeholder="Buscar..."
+                    value="<?= isset($q) ? esc($q) : '' ?>"
+                >
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
               <div class="card-body table-responsive p-0" style="max-height: 500px;">
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>Clave empleado</th>
                       <th>Nombre completo</th>
-                      <th>UserName</th>
+                      <th>Nombre de usuario</th>
                       <th>Correo</th>
                       <th>Acciones</th>
                     </tr>

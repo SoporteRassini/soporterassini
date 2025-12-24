@@ -135,4 +135,22 @@ class Empleado extends BaseController
         $this->session->setFlashdata('success', 'Empleado eliminado correctamente.');
         return redirect()->to(site_url('empleado'));
     }
+
+    public function buscar(){
+        $texto = $this->request->getGet('q');
+
+    $empleado = $this->empleadoModel
+        ->like('Nombres', $texto)
+        ->orLike('UserName', $texto)
+        ->orLike('ApellidoP', $texto)
+        ->orlike('ApellidoM', $texto)
+        ->findAll();
+
+    $data = [
+        'empleado' => $empleado,
+        'q'       => $texto,
+    ];
+
+    return view('Panel/CRUD_empleado', $data);
+    }
 }

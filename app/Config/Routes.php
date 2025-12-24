@@ -23,6 +23,7 @@ $routes->group('empleado', ['filter' => 'auth'], function($routes) {
     $routes->post('update/(:num)', 'Empleado::update/$1');
     $routes->get('delete/(:num)', 'Empleado::delete/$1');
 });
+$routes->get('empleado/buscar', 'Empleado::buscar');
 
 
 //crud equipos
